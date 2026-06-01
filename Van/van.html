@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ═══════════════════════════════════════════
+       Aqui cambias tu nombre we
+  ═══════════════════════════════════════════ -->
+  <title>Van — Developer · Hyprsea Solutions</title>
+  <meta name="description" content="Van — Co-founder of Hyprsea Solutions. Web developer and tech enthusiast based in CDMX.">
+
+  <!-- Fonts & Icons (same as main site) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+  <style>
+    /* ─────────────────────────────────────────
+       Aqui pa q cambies tus colores y así
+    ───────────────────────────────────────── */
+    :root {
+      /* color primario */
+      --accent:       #2089C8;   /* botón primario y color de acento */
+      --accent-dark:  #1568A3;   /* hover state */
+      --accent-light: #EEF6FF;   /* soft backgrounds */
+      --accent-glow:  rgba(32, 137, 200, 0.25); /* shadow color */
+
+      /* Secondary accent (the "pop" color) */
+      --pop:          #27A98C;   /* miku green */
+      --pop-light:    #DFFAF3;
+
+      /* paleta general, suegiría no cambiar nada aki */
+      --white:    #FFFFFF;
+      --gray-50:  #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-400: #94A3B8;
+      --gray-600: #475569;
+      --gray-800: #1E293B;
+      --gray-900: #0F172A;
+
+      --surface:  #FFFFFF;
+      --border:   #E2E8F0;
+      --border-light: #F1F5F9;
+
+      --text-primary:   #0F172A;
+      --text-secondary: #475569;
+      --text-muted:     #94A3B8;
+
+      /* Border radius */
+      --r-sm:  8px;
+      --r-md:  14px;
+      --r-lg:  20px;
+      --r-xl:  28px;
+      --r-2xl: 40px;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
+    }
+
+    /* ─── Reset ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: var(--text-primary);
+      background: var(--gray-50);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--gray-100); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; opacity: .5; }
+
+    /* ─── Nav ─── */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 600; color: var(--text-secondary);
+      text-decoration: none; padding: 6px 10px;
+      border-radius: var(--r-sm);
+      transition: all .15s;
+    }
+    .nav-back:hover { color: var(--accent); background: var(--accent-light); }
+    .nav-back img { height: 26px; width: auto; }
+
+    .nav-name { font-size: 15px; font-weight: 700; color: var(--gray-800); }
+
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; padding: 5px 10px;
+      border-radius: var(--r-sm); transition: all .15s;
+    }
+    .nav-links a:hover { color: var(--accent); background: var(--accent-light); }
+
+    .nav-hire {
+      font-size: 13px; font-weight: 600;
+      padding: 7px 14px; border-radius: var(--r-md);
+      background: var(--accent); color: #fff;
+      text-decoration: none; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: all .15s;
+      box-shadow: 0 2px 8px var(--accent-glow);
+      font-family: inherit;
+    }
+    .nav-hire:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+    /* Mobile nav */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; border: none; background: transparent;
+    }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; }
+    .mobile-menu {
+      display: none; position: fixed; top: 60px; left: 0; right: 0;
+      background: white; border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem; flex-direction: column; gap: 4px;
+      z-index: 99; box-shadow: var(--shadow-lg);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text-secondary); text-decoration: none; padding: 10px 12px; border-radius: var(--r-sm); }
+    .mobile-menu a:hover { background: var(--accent-light); color: var(--accent); }
+    .mobile-menu .mob-hire { background: var(--accent); color: white; margin-top: 6px; text-align: center; border-radius: var(--r-md); padding: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .nav-hire { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ─── Hero ─── */
+    .hero-wrap {
+      background: linear-gradient(150deg, var(--accent-light) 0%, #fff 45%, var(--pop-light) 100%);
+      padding: 5rem 1.5rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-wrap::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 450px; height: 450px; border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+
+    /* ═══════════════════════════════════════════
+       CHANGE THIS: Your photo
+       Replace "your-photo.jpg" with your image file.
+       If you don't have one yet, the initials
+       placeholder will show automatically.
+    ═══════════════════════════════════════════ */
+    .hero-photo-wrap { margin-bottom: 2rem; }
+    .hero-photo {
+      width: 96px; height: 96px; border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 4px 20px var(--accent-glow);
+      object-fit: cover;
+      display: block;
+    }
+    .hero-photo-placeholder {
+      width: 96px; height: 96px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--pop));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; font-weight: 700; color: white;
+      box-shadow: 0 4px 20px var(--accent-glow);
+      border: 3px solid white;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600;
+      color: var(--pop); background: var(--pop-light);
+      border-radius: 99px; padding: 5px 14px; margin-bottom: 1.25rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       CHANGE THIS: Your name and title
+    ═══════════════════════════════════════════ */
+    .hero h1 {
+      font-size: clamp(34px, 6vw, 52px);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -1.5px; margin-bottom: 0.5rem;
+    }
+    .hero h1 .name { color: var(--gray-900); }
+    .hero h1 .title { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 17px; color: var(--text-secondary);
+      line-height: 1.65; margin-bottom: 2rem;
+      max-width: 480px;
+    }
+
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2rem; }
+    .tag {
+      font-size: 12px; font-weight: 600;
+      padding: 5px 12px; border-radius: 99px;
+      background: white; color: var(--text-secondary);
+      border: 1.5px solid var(--border);
+    }
+    .tag.accent { background: var(--accent-light); color: var(--accent); border-color: transparent; }
+    .tag.pop { background: var(--pop-light); color: var(--pop); border-color: transparent; }
+
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .btn-primary {
+      padding: 13px 24px; border-radius: var(--r-lg);
+      background: var(--accent); color: #fff;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: all .2s; font-family: inherit;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); }
+
+    .btn-ghost {
+      padding: 13px 24px; border-radius: var(--r-lg);
+      background: white; color: var(--text-primary);
+      font-size: 15px; font-weight: 600;
+      text-decoration: none; border: 1.5px solid var(--border);
+      cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+      transition: all .2s; font-family: inherit;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; }
+      .hero-actions a, .hero-actions button { width: 100%; justify-content: center; }
+    }
+
+    /* ─── Sections ─── */
+    .section-outer { padding: 1.25rem 1.5rem; max-width: 860px; margin: 0 auto; }
+    .section-inner {
+      background: var(--surface);
+      border-radius: var(--r-2xl);
+      padding: 2.5rem 2.25rem;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.25rem;
+    }
+
+    .section-label {
+      font-size: 11px; font-weight: 700; color: var(--pop);
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 0.5rem;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .section-label::before {
+      content: ''; display: inline-block;
+      width: 16px; height: 2px;
+      background: var(--pop); border-radius: 2px;
+    }
+    .section-title { font-size: 24px; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+    .section-sub { font-size: 15px; color: var(--text-secondary); margin-bottom: 1.75rem; line-height: 1.65; }
+
+    /* ─── About ─── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .about-stat {
+      background: var(--gray-50); border: 1.5px solid var(--border-light);
+      border-radius: var(--r-xl); padding: 1.25rem 1.5rem;
+    }
+    .about-stat .stat-num { font-size: 28px; font-weight: 700; color: var(--accent); letter-spacing: -1px; }
+    .about-stat .stat-label { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+    .about-text { font-size: 15px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 1rem; }
+
+    @media (max-width: 480px) { .about-grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
+
+    /* ─── Skills ─── */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-chip {
+      display: flex; align-items: center; gap: 7px;
+      padding: 8px 14px; border-radius: var(--r-md);
+      background: var(--gray-50); border: 1.5px solid var(--border-light);
+      font-size: 13px; font-weight: 600; color: var(--text-primary);
+      transition: all .15s;
+    }
+    .skill-chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+    .skill-chip i { font-size: 18px; color: var(--accent); }
+    .skill-chip.green i { color: var(--pop); }
+    .skill-chip.green:hover { border-color: var(--pop); color: var(--pop); background: var(--pop-light); }
+
+    /* ─── Projects ─── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .project-card {
+      background: var(--gray-50); border: 1.5px solid var(--border-light);
+      border-radius: var(--r-xl); padding: 1.5rem;
+      transition: all .2s; text-decoration: none; color: inherit;
+      display: block;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+    .project-thumb {
+      width: 100%; height: 140px;
+      border-radius: var(--r-lg); overflow: hidden;
+      margin-bottom: 1rem; background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+    }
+    /* ═══════════════════════════════════════════
+       CHANGE THIS: Replace with a screenshot!
+       <img src="project1-screenshot.png" ...>
+       inside .project-thumb, or keep the icon.
+    ═══════════════════════════════════════════ */
+    .project-thumb i { font-size: 40px; color: var(--accent); opacity: .4; }
+    .project-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.75rem; }
+    .project-tag {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 9px; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+    }
+    .project-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 0.35rem; }
+    .project-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem; }
+    .project-link {
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .project-link i { font-size: 14px; transition: transform .15s; }
+    .project-card:hover .project-link i { transform: translateX(3px); }
+
+    /* ─── Contact CTA ─── */
+    .cta-inner {
+      background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
+      border-radius: var(--r-2xl);
+      padding: 3rem 2rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-inner::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 250px; height: 250px; border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-inner h2 { font-size: 28px; font-weight: 700; color: white; margin-bottom: 0.6rem; }
+    .cta-inner p { font-size: 16px; color: rgba(255,255,255,.55); margin-bottom: 2rem; }
+    .btn-wa {
+      padding: 14px 28px; border-radius: var(--r-lg);
+      background: #25D366; color: #fff;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: all .2s; font-family: inherit;
+      box-shadow: 0 4px 14px rgba(37,211,102,.3);
+    }
+    .btn-wa:hover { background: #1ebe5d; transform: translateY(-2px); }
+    .cta-email { display: block; margin-top: 1rem; font-size: 13px; color: rgba(255,255,255,.4); text-decoration: none; }
+    .cta-email:hover { color: rgba(255,255,255,.7); }
+
+    /* ─── Footer ─── */
+    footer {
+      max-width: 860px; margin: 0 auto;
+      padding: 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-back { font-size: 13px; color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+    .footer-back:hover { color: var(--accent); }
+    .footer-text { font-size: 13px; color: var(--text-muted); }
+    .social-links { display: flex; gap: 8px; }
+    .social-links a {
+      width: 34px; height: 34px; border-radius: var(--r-sm);
+      border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); text-decoration: none; transition: all .15s;
+    }
+    .social-links a:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+    .social-links i { font-size: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <!-- Back to Hyprsea main site -->
+  <a class="nav-back" href="../index.html">
+    <img src="../HsSlogoclear.png" alt="Hyprsea" id="nav-logo">
+    <span>Hyprsea</span>
+  </a>
+
+  <!-- CHANGE THIS: your name in the middle -->
+  <span class="nav-name">Van</span>
+
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" class="nav-hire">
+      <i class="ti ti-send"></i> Hire me
+    </a>
+  </div>
+
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#skills" onclick="closeMenu()">Skills</a>
+  <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" class="mob-hire" onclick="closeMenu()">
+    <i class="ti ti-send"></i> Hire me
+  </a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero-wrap">
+  <div class="hero">
+
+    <!-- CHANGE THIS: swap for your photo when ready -->
+    <div class="hero-photo-wrap">
+      <!-- Option A — placeholder initials (active now) -->
+      <div class="hero-photo-placeholder">V</div>
+
+      <!-- Option B — uncomment this and comment out the div above when you have a photo:
+      <img class="hero-photo" src="van-photo.jpg" alt="Van">
+      -->
+    </div>
+
+    <div class="hero-badge">
+      <i class="ti ti-anchor"></i>
+      Hyprsea Solutions · CDMX & Hidalgo
+    </div>
+
+    <!-- CHANGE THIS: your name and title -->
+    <h1>
+      <span class="name">Hey, I'm Van</span><br>
+      <span class="title">Developer & Co-founder</span>
+    </h1>
+
+    <!-- CHANGE THIS: your personal intro -->
+    <p class="hero-sub">
+      I build websites, apps, and fix tech for real businesses.
+      Co-founder of Hyprsea Solutions. Currently studying Software Development.
+      Based in CDMX and Hidalgo.
+    </p>
+
+    <!-- CHANGE THIS: your personal tags -->
+    <div class="hero-tags">
+      <span class="tag accent">HTML · CSS · JS</span>
+      <span class="tag pop">In-person repairs</span>
+      <span class="tag">Open to work</span>
+      <span class="tag">CDMX</span>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">
+        <i class="ti ti-folder"></i> See my projects
+      </a>
+      <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" class="btn-ghost">
+        <i class="ti ti-brand-whatsapp"></i> Contact me
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<div class="section-outer" id="about">
+  <div class="section-inner">
+    <div class="section-label">About me</div>
+    <div class="section-title">A little about Van</div>
+
+    <!-- CHANGE THIS: your bio -->
+    <p class="about-text">
+      I'm a developer and tech enthusiast from Mexico, currently studying Software Development at university.
+      Together with Bi, I co-founded Hyprsea Solutions to bring accessible, quality tech services to local businesses.
+    </p>
+    <p class="about-text">
+      I enjoy building things that actually solve problems — whether that's a website for a small business,
+      a custom app to replace a spreadsheet, or getting someone's phone working again on the same day.
+    </p>
+
+    <!-- CHANGE THIS: your stats — or remove this block -->
+    <div class="about-grid" style="margin-top:1.5rem;">
+      <div class="about-stat">
+        <div class="stat-num">+5</div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+      <div class="about-stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Years coding</div>
+      </div>
+      <div class="about-stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Languages</div>
+      </div>
+      <div class="about-stat">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Coffees consumed</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SKILLS ═══ -->
+<div class="section-outer" id="skills">
+  <div class="section-inner">
+    <div class="section-label">Skills</div>
+    <div class="section-title">What I work with</div>
+    <p class="section-sub">Technologies and tools I use day to day.</p>
+
+    <!-- CHANGE THIS: add or remove skills as needed -->
+    <!-- Icon names from tabler-icons.io — search any tech there -->
+    <div class="skills-grid">
+      <div class="skill-chip"><i class="ti ti-brand-html5"></i> HTML</div>
+      <div class="skill-chip"><i class="ti ti-brand-css3"></i> CSS</div>
+      <div class="skill-chip"><i class="ti ti-brand-javascript"></i> JavaScript</div>
+      <div class="skill-chip green"><i class="ti ti-brand-python"></i> Python</div>
+      <div class="skill-chip"><i class="ti ti-brand-git"></i> Git</div>
+      <div class="skill-chip"><i class="ti ti-brand-vscode"></i> VS Code</div>
+      <div class="skill-chip green"><i class="ti ti-tool"></i> Hardware repair</div>
+      <div class="skill-chip"><i class="ti ti-brand-figma"></i> Figma</div>
+      <div class="skill-chip green"><i class="ti ti-device-mobile"></i> Mobile support</div>
+      <!-- Add more:
+      <div class="skill-chip"><i class="ti ti-brand-react"></i> React</div>
+      <div class="skill-chip"><i class="ti ti-brand-nodejs"></i> Node.js</div>
+      -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PROJECTS ═══ -->
+<div class="section-outer" id="projects">
+  <div class="section-inner">
+    <div class="section-label">Projects</div>
+    <div class="section-title">Things I've built</div>
+    <p class="section-sub">A selection of work — personal, freelance, and for Hyprsea clients.</p>
+
+    <div class="projects-grid">
+
+      <!-- PROJECT 1 — Hyprsea (already done, great first entry!) -->
+      <a class="project-card" href="../index.html">
+        <div class="project-thumb">
+          <!-- CHANGE THIS: replace with a screenshot of the site -->
+          <i class="ti ti-world"></i>
+          <!-- <img src="hyprsea-screenshot.png" alt="Hyprsea Solutions"> -->
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">HTML</span>
+          <span class="project-tag">CSS</span>
+          <span class="project-tag">JS</span>
+        </div>
+        <h3>Hyprsea Solutions</h3>
+        <p>Bilingual company landing page with WhatsApp CTA, pricing, and dark-mode VS Code demo.</p>
+        <span class="project-link">View site <i class="ti ti-arrow-right"></i></span>
+      </a>
+
+      <!-- PROJECT 2 — template, fill in your real project -->
+      <a class="project-card" href="#">
+        <div class="project-thumb">
+          <i class="ti ti-device-mobile"></i>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">App</span>
+        </div>
+        <!-- CHANGE THIS -->
+        <h3>Your next project</h3>
+        <p>Describe what you built, what problem it solved, and what tech you used.</p>
+        <span class="project-link">View project <i class="ti ti-arrow-right"></i></span>
+      </a>
+
+      <!-- PROJECT 3 — another template slot -->
+      <a class="project-card" href="#">
+        <div class="project-thumb">
+          <i class="ti ti-code"></i>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Coming soon</span>
+        </div>
+        <h3>More on the way</h3>
+        <p>Currently working on new projects. Check back soon or reach out to see what's cooking.</p>
+        <span class="project-link">Say hi <i class="ti ti-arrow-right"></i></span>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONTACT CTA ═══ -->
+<div class="section-outer">
+  <div class="cta-inner">
+    <h2>Let's work together</h2>
+    <p>Got a project in mind? Reach out and let's build something.</p>
+    <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" class="btn-wa">
+      <i class="ti ti-brand-whatsapp"></i> Message me on WhatsApp
+    </a>
+    <a href="mailto:ivy@hyprsea.com" class="cta-email">ivy@hyprsea.com</a>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <a class="footer-back" href="../index.html">
+    <i class="ti ti-arrow-left"></i> Back to Hyprsea
+  </a>
+  <!-- CHANGE THIS: your name -->
+  <span class="footer-text">Van · Hyprsea Solutions · 2026</span>
+  <div class="social-links">
+    <!-- CHANGE THIS: your personal social links -->
+    <a href="https://github.com/" target="_blank" aria-label="GitHub"><i class="ti ti-brand-github"></i></a>
+    <a href="https://www.instagram.com/hyprsea" target="_blank" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+    <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" aria-label="WhatsApp"><i class="ti ti-brand-whatsapp"></i></a>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+function closeMenu()  { document.getElementById('mobile-menu').classList.remove('open'); }
+
+// Logo dark mode invert
+const mql = window.matchMedia('(prefers-color-scheme: dark)');
+function updateLogo() {
+  const el = document.getElementById('nav-logo');
+  if (el) el.style.filter = mql.matches ? 'brightness(0) invert(1)' : 'none';
+}
+mql.addEventListener('change', updateLogo);
+updateLogo();
+</script>
+
+</body>
+</html>
