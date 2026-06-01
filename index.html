@@ -1,10 +1,421 @@
-<!DOCTYPE html>
-<html>
-    <title>Hyprsea solutions</title>
-    <body style="background-color: pink;"> 
-        <h1 style="color:blue">the site is under construction ngl</h1>
-        <p>We are working hard to bring you something amazing! (promise)</p>
-        <h1><b>This is us working on the site <i>btw</i>:</b></h1>
-        <img src="https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUydjIyajBoa21tbmlmZGhpYXkxOWU5MTRrNXhmaXpuYjlqN2U2em5xMSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VbnUQpnihPSIgIXuZv/200w.gif" alt="A cute gif">
-    </body>
-</html>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); color: var(--color-text-primary); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+:root {
+  --sea-50: #E8F4FD;
+  --sea-100: #C5E3F7;
+  --sea-200: #8EC9EF;
+  --sea-400: #2E9BD6;
+  --sea-500: #1A7DB5;
+  --sea-600: #125E8A;
+  --sea-700: #0C4366;
+  --sea-800: #073050;
+  --sea-900: #031E35;
+  --deep: #0A2540;
+}
+
+.lang-btn { cursor: pointer; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-secondary); transition: all .15s; }
+.lang-btn.active { background: var(--sea-500); color: #fff; border-color: var(--sea-500); }
+
+nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); position: sticky; top: 0; z-index: 10; }
+.nav-logo img { height: 38px; width: auto; display: block; }
+.nav-links { display: flex; gap: 1.5rem; align-items: center; }
+.nav-links a { font-size: 14px; color: var(--color-text-secondary); text-decoration: none; transition: color .15s; }
+.nav-links a:hover { color: var(--sea-500); }
+.nav-cta { font-size: 14px; font-weight: 500; padding: 8px 18px; border-radius: var(--border-radius-md); background: var(--sea-500); color: #fff !important; text-decoration: none !important; border: none; cursor: pointer; transition: opacity .15s; display: inline-flex; align-items: center; gap: 6px; }
+.nav-cta:hover { opacity: 0.88; }
+
+.hero { text-align: center; padding: 5rem 2rem 4rem; max-width: 720px; margin: 0 auto; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--sea-600); background: var(--sea-50); border-radius: 99px; padding: 4px 14px; margin-bottom: 1.5rem; }
+.hero h1 { font-size: 46px; font-weight: 500; line-height: 1.15; margin-bottom: 1.25rem; letter-spacing: -0.5px; }
+.hero h1 span { color: var(--sea-500); }
+.hero p { font-size: 18px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 2.5rem; max-width: 520px; margin-left: auto; margin-right: auto; }
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary { padding: 14px 28px; border-radius: var(--border-radius-md); background: var(--sea-500); color: #fff; font-size: 15px; font-weight: 500; text-decoration: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: opacity .15s; }
+.btn-primary:hover { opacity: 0.88; }
+.btn-secondary { padding: 14px 28px; border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); font-size: 15px; font-weight: 500; text-decoration: none; border: 0.5px solid var(--color-border-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background .15s; }
+.btn-secondary:hover { background: var(--color-background-secondary); }
+
+.vscode-demo { max-width: 860px; margin: 0 auto 5rem; padding: 0 1.5rem; }
+.vscode-window { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+.vscode-titlebar { background: var(--deep); padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-red { background: #ff5f57; } .dot-yellow { background: #ffbd2e; } .dot-green { background: #28c840; }
+.vscode-title { font-size: 12px; color: #8ab4d4; margin-left: auto; margin-right: auto; font-family: var(--font-mono); }
+.vscode-body { display: grid; grid-template-columns: 200px 1fr; background: #0d2137; min-height: 280px; }
+.vscode-sidebar { background: #0a1e30; border-right: 1px solid #1a3a55; padding: 12px 0; }
+.sidebar-item { padding: 6px 16px; font-size: 13px; color: #7ab0cc; font-family: var(--font-mono); cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background .1s; }
+.sidebar-item:hover, .sidebar-item.active { background: #1a3a55; color: #c8e0f0; }
+.sidebar-item i { font-size: 15px; color: var(--sea-400); }
+.vscode-editor { padding: 20px 24px; font-family: var(--font-mono); font-size: 13px; color: #c8e0f0; line-height: 1.7; }
+.cc { color: #4a7e9e; } .ck { color: #569cd6; } .cf { color: #9cdcfe; } .cs { color: #ce9178; } .cm { color: #2e9bd6; }
+
+.divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 0; }
+section { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
+.section-label { font-size: 12px; font-weight: 500; color: var(--sea-600); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+.section-title { font-size: 30px; font-weight: 500; margin-bottom: 0.75rem; }
+.section-sub { font-size: 16px; color: var(--color-text-secondary); margin-bottom: 2.5rem; }
+
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.service-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.5rem; transition: border-color .2s; }
+.service-card:hover { border-color: var(--sea-400); }
+.service-icon { width: 44px; height: 44px; border-radius: var(--border-radius-md); background: var(--sea-50); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.service-icon i { font-size: 22px; color: var(--sea-600); }
+.service-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 0.5rem; }
+.service-card p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
+
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.team-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.75rem 1.5rem; text-align: center; }
+.team-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--sea-100); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 500; color: var(--sea-700); margin: 0 auto 1rem; }
+.team-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 0.25rem; }
+.team-card p { font-size: 13px; color: var(--color-text-secondary); }
+
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.price-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.75rem 1.5rem; }
+.price-card.featured { border: 2px solid var(--sea-400); }
+.price-badge { display: inline-block; font-size: 11px; font-weight: 500; color: var(--sea-700); background: var(--sea-50); border-radius: 99px; padding: 3px 10px; margin-bottom: 1rem; }
+.price-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 0.25rem; }
+.price-card .price { font-size: 28px; font-weight: 500; margin: 0.75rem 0; color: var(--sea-600); }
+.price-card .price span { font-size: 14px; color: var(--color-text-secondary); font-weight: 400; }
+.price-card ul { list-style: none; margin: 1rem 0 1.5rem; }
+.price-card ul li { font-size: 14px; color: var(--color-text-secondary); padding: 5px 0; display: flex; align-items: center; gap: 8px; }
+.price-card ul li i { font-size: 15px; color: var(--sea-500); flex-shrink: 0; }
+
+.testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.testi-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.5rem; }
+.testi-stars { display: flex; gap: 3px; margin-bottom: 0.75rem; }
+.testi-stars i { font-size: 14px; color: #BA7517; }
+.testi-card p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.65; margin-bottom: 1rem; }
+.testi-author { display: flex; align-items: center; gap: 10px; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--sea-100); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: var(--sea-700); flex-shrink: 0; }
+.testi-name { font-size: 13px; font-weight: 500; }
+.testi-role { font-size: 12px; color: var(--color-text-secondary); }
+
+.cta-section { text-align: center; padding: 5rem 2rem; background: var(--sea-800); }
+.cta-section h2 { font-size: 34px; font-weight: 500; margin-bottom: 0.75rem; color: #fff; }
+.cta-section p { font-size: 17px; color: var(--sea-200); margin-bottom: 2rem; }
+.btn-wa { padding: 16px 36px; border-radius: var(--border-radius-md); background: #25D366; color: #fff; font-size: 16px; font-weight: 500; text-decoration: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: opacity .15s; }
+.btn-wa:hover { opacity: 0.88; }
+
+footer { background: var(--deep); padding: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-logo img { height: 28px; width: auto; filter: brightness(0) invert(1); opacity: 0.7; }
+.footer-text { font-size: 13px; color: var(--sea-200); }
+.social-links { display: flex; gap: 12px; }
+.social-links a { width: 36px; height: 36px; border-radius: var(--border-radius-md); border: 0.5px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: var(--sea-200); text-decoration: none; transition: background .15s; }
+.social-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.social-links i { font-size: 17px; }
+</style>
+
+<h2 class="sr-only">Hyprsea Solutions — Developer portfolio and services landing page</h2>
+
+<nav>
+  <div class="nav-logo">
+    <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/wAARC" alt="Hyprsea Solutions" style="height:38px;width:auto;filter:var(--logo-filter,none);" id="nav-logo-img">
+  </div>
+  <div class="nav-links">
+    <a href="#services" id="nav-services">Services</a>
+    <a href="#team" id="nav-team">Team</a>
+    <a href="#pricing" id="nav-pricing">Pricing</a>
+    <a href="#testi" id="nav-testi">Reviews</a>
+    <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" class="nav-cta" id="nav-cta">
+      <i class="ti ti-brand-whatsapp" aria-hidden="true"></i> <span id="nav-cta-text">Book a call</span>
+    </a>
+  </div>
+  <div style="display:flex;gap:6px;">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge"><i class="ti ti-anchor" aria-hidden="true"></i> <span id="badge-text">Van & Bi — Hyprsea Solutions</span></div>
+  <h1 id="hero-title">Solutions <span>within reach.</span></h1>
+  <p id="hero-sub">We build apps, websites, and provide in-person tech support — everything your business needs to grow in the digital world.</p>
+  <div class="hero-actions">
+    <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" class="btn-primary">
+      <i class="ti ti-brand-whatsapp" aria-hidden="true"></i> <span id="cta-wa">Chat with us on WhatsApp</span>
+    </a>
+    <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+      <i class="ti ti-arrow-down" aria-hidden="true"></i> <span id="cta-see">See our services</span>
+    </button>
+  </div>
+</div>
+
+<div class="vscode-demo">
+  <div class="vscode-window">
+    <div class="vscode-titlebar">
+      <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+      <span class="vscode-title">hyprsea-solutions / main.js</span>
+    </div>
+    <div class="vscode-body">
+      <div class="vscode-sidebar">
+        <div class="sidebar-item active"><i class="ti ti-file-code" aria-hidden="true"></i> main.js</div>
+        <div class="sidebar-item"><i class="ti ti-file" aria-hidden="true"></i> index.html</div>
+        <div class="sidebar-item"><i class="ti ti-file" aria-hidden="true"></i> styles.css</div>
+        <div class="sidebar-item"><i class="ti ti-folder" aria-hidden="true"></i> /api</div>
+        <div class="sidebar-item"><i class="ti ti-folder" aria-hidden="true"></i> /repairs</div>
+      </div>
+      <div class="vscode-editor">
+        <div class="cc">// Hyprsea Solutions — Van & Bi</div><br>
+        <div><span class="ck">const</span> <span class="cf">team</span> = [<span class="cs">'Van'</span>, <span class="cs">'Bi'</span>];</div>
+        <div><span class="ck">const</span> <span class="cf">mission</span> = <span class="cs">'Solutions within reach'</span>;</div><br>
+        <div><span class="ck">async function</span> <span class="cm">buildForYou</span>(business) {</div>
+        <div>&nbsp;&nbsp;<span class="ck">const</span> result = <span class="ck">await</span> <span class="cm">deliver</span>({</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cf">web</span>: <span class="ck">true</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cf">apps</span>: <span class="ck">true</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cf">repairs</span>: <span class="ck">true</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cf">onTime</span>: <span class="ck">true</span>,</div>
+        <div>&nbsp;&nbsp;});</div>
+        <div>&nbsp;&nbsp;<span class="ck">return</span> result.happy; <span class="cc">// always true ✓</span></div>
+        <div>}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section id="services">
+  <div class="section-label" id="lbl-srv">What we do</div>
+  <div class="section-title" id="ttl-srv">Everything your business needs</div>
+  <p class="section-sub" id="sub-srv">From your digital presence to hands-on hardware support — we've got you covered.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-world" aria-hidden="true"></i></div>
+      <h3 id="s1t">Web development</h3>
+      <p id="s1d">Custom websites tailored to your brand — fast, modern, and mobile-ready.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+      <h3 id="s2t">Business apps</h3>
+      <p id="s2d">Simple, effective apps to streamline your operations. Software that actually fits how you work.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-tool" aria-hidden="true"></i></div>
+      <h3 id="s3t">In-person repairs</h3>
+      <p id="s3d">Hardware and software repairs on-site. We diagnose, fix, and get your tech back up fast.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="team">
+  <div class="section-label" id="lbl-team">The team</div>
+  <div class="section-title" id="ttl-team">Meet Van & Bi</div>
+  <p class="section-sub" id="sub-team">Two developers, one shared passion for building things that work.</p>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">V</div>
+      <h3>Van</h3>
+      <p id="van-role">Co-founder · Developer</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">B</div>
+      <h3>Bi</h3>
+      <p id="bi-role">Co-founder · Developer</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="pricing">
+  <div class="section-label" id="lbl-p">Pricing</div>
+  <div class="section-title" id="ttl-p">Simple, transparent plans</div>
+  <p class="section-sub" id="sub-p">No hidden fees. Let's talk and build something right for you.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <h3 id="p1n">Starter</h3>
+      <p style="font-size:13px;color:var(--color-text-secondary);margin-top:4px;" id="p1d">For small businesses getting started.</p>
+      <div class="price" id="p1price">Coming soon</div>
+      <ul>
+        <li><i class="ti ti-check" aria-hidden="true"></i> <span id="p1f1">Landing page</span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i> <span id="p1f2">Mobile-friendly design</span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i> <span id="p1f3">Contact form</span></li>
+      </ul>
+      <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" class="btn-secondary" style="width:100%;justify-content:center;text-decoration:none;" id="p1btn">
+        <i class="ti ti-brand-whatsapp" aria-hidden="true"></i> <span id="p1btn-t">Get started</span>
+      </a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge" id="popular">Most popular</div>
+      <h3 id="p2n">Growth</h3>
+      <p style="font-size:13px;color:var(--color-text-secondary);margin-top:4px;" id="p2d">For growing businesses that need more.</p>
+      <div class="price" id="p2price">Coming soon</div>
+      <ul>
+        <li><i class="ti ti-check" aria-hidden="true"></i> <span id="p2f1">Full website</span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i> <span id="p2f2">Custom app or admin panel</span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i> <span id="p2f3">SEO basics</span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i> <span id="p2f4">1 month of support</span></li>
+      </ul>
+      <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" class="btn-primary" style="width:100%;justify-content:center;text-decoration:none;" id="p2btn">
+        <i class="ti ti-brand-whatsapp" aria-hidden="true"></i> <span id="p2btn-t">Book a call</span>
+      </a>
+    </div>
+    <div class="price-card">
+      <h3 id="p3n">Custom</h3>
+      <p style="font-size:13px;color:var(--color-text-secondary);margin-top:4px;" id="p3d">Tailored for any need.</p>
+      <div class="price" id="p3price">Let's talk</div>
+      <ul>
+        <li><i class="ti ti-check" aria-hidden="true"></i> <span id="p3f1">Hardware & software repairs</span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i> <span id="p3f2">On-site visits</span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i> <span id="p3f3">Monthly retainer</span></li>
+      </ul>
+      <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" class="btn-secondary" style="width:100%;justify-content:center;text-decoration:none;" id="p3btn">
+        <i class="ti ti-brand-whatsapp" aria-hidden="true"></i> <span id="p3btn-t">Get a quote</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="testi">
+  <div class="section-label" id="lbl-t">Testimonials</div>
+  <div class="section-title" id="ttl-t">What our clients say</div>
+  <p class="section-sub" id="sub-t">Real businesses, real results. More coming soon.</p>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars"><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i></div>
+      <p id="t1q">"They built our website in less than a week and it looked incredible. Clients started calling us right away."</p>
+      <div class="testi-author"><div class="avatar">MR</div><div><div class="testi-name" id="t1n">Maria Rodríguez</div><div class="testi-role" id="t1r">Owner, Panadería Don Luis</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars"><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i></div>
+      <p id="t2q">"Super professional. They came to our office and fixed all our computers the same day. Total lifesavers."</p>
+      <div class="testi-author"><div class="avatar">JV</div><div><div class="testi-name" id="t2n">Jorge Villanueva</div><div class="testi-role" id="t2r">Manager, Agencia KV</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars"><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i><i class="ti ti-star-filled" aria-hidden="true"></i></div>
+      <p id="t3q">"The inventory app they built saves us hours every week. Easy to use, exactly what we needed."</p>
+      <div class="testi-author"><div class="avatar">SL</div><div><div class="testi-name" id="t3n">Sofía López</div><div class="testi-role" id="t3r">Director, Ferretería El Pino</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <h2 id="cta-title">Ready to get started?</h2>
+  <p id="cta-sub">Send us a message and let's talk about what we can build for you.</p>
+  <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" class="btn-wa">
+    <i class="ti ti-brand-whatsapp" aria-hidden="true"></i> <span id="cta-btn">Message us on WhatsApp</span>
+  </a>
+  <div style="margin-top:1.5rem;">
+    <a href="mailto:ivy@hyprsea.com" style="color:var(--sea-200);font-size:14px;text-decoration:none;" id="cta-email">or email us at ivy@hyprsea.com</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/wAARC" alt="Hyprsea Solutions" style="height:28px;width:auto;filter:brightness(0) invert(1);opacity:0.7;">
+  </div>
+  <span class="footer-text" id="footer-txt">© 2026 Hyprsea Solutions · ivy@hyprsea.com</span>
+  <div class="social-links">
+    <a href="https://www.instagram.com/hyprsea" target="_blank" aria-label="Instagram"><i class="ti ti-brand-instagram" aria-hidden="true"></i></a>
+    <a href="https://www.facebook.com/share/1BEVGx8VW6/" target="_blank" aria-label="Facebook"><i class="ti ti-brand-facebook" aria-hidden="true"></i></a>
+    <a href="https://wa.me/message/RRPHXWNTZY66H1" target="_blank" aria-label="WhatsApp"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i></a>
+    <a href="mailto:ivy@hyprsea.com" aria-label="Email"><i class="ti ti-mail" aria-hidden="true"></i></a>
+  </div>
+</footer>
+
+<script>
+const T = {
+  en: {
+    navSrv:'Services', navTeam:'Team', navP:'Pricing', navT:'Reviews', navCta:'Book a call',
+    badge:'Van & Bi — Hyprsea Solutions',
+    heroTitle:'Solutions <span style="color:var(--sea-500)">within reach.</span>',
+    heroSub:'We build apps, websites, and provide in-person tech support — everything your business needs to grow.',
+    ctaWa:'Chat with us on WhatsApp', ctaSee:'See our services',
+    lblSrv:'What we do', ttlSrv:'Everything your business needs', subSrv:"From your digital presence to hands-on hardware support — we've got you covered.",
+    s1t:'Web development', s1d:'Custom websites tailored to your brand — fast, modern, and mobile-ready.',
+    s2t:'Business apps', s2d:'Simple, effective apps to streamline your operations.',
+    s3t:'In-person repairs', s3d:'Hardware and software repairs on-site. We diagnose, fix, and get your tech back up fast.',
+    lblTeam:'The team', ttlTeam:'Meet Van & Bi', subTeam:'Two developers, one shared passion for building things that work.',
+    vanRole:'Co-founder · Developer', biRole:'Co-founder · Developer',
+    lblP:'Pricing', ttlP:'Simple, transparent plans', subP:"No hidden fees. Let's talk and build something right for you.",
+    popular:'Most popular',
+    p1n:'Starter', p1d:'For small businesses getting started.', p1price:'Coming soon',
+    p1f1:'Landing page', p1f2:'Mobile-friendly design', p1f3:'Contact form', p1btnT:'Get started',
+    p2n:'Growth', p2d:'For growing businesses that need more.', p2price:'Coming soon',
+    p2f1:'Full website', p2f2:'Custom app or admin panel', p2f3:'SEO basics', p2f4:'1 month of support', p2btnT:'Book a call',
+    p3n:'Custom', p3d:'Tailored for any need.', p3price:"Let's talk",
+    p3f1:'Hardware & software repairs', p3f2:'On-site visits', p3f3:'Monthly retainer', p3btnT:'Get a quote',
+    lblT:'Testimonials', ttlT:'What our clients say', subT:'Real businesses, real results. More coming soon.',
+    t1q:'"They built our website in less than a week and it looked incredible. Clients started calling us right away."',
+    t2q:'"Super professional. They came to our office and fixed all our computers the same day. Total lifesavers."',
+    t3q:'"The inventory app they built saves us hours every week. Easy to use, exactly what we needed."',
+    t1r:'Owner, Panadería Don Luis', t2r:'Manager, Agencia KV', t3r:'Director, Ferretería El Pino',
+    ctaTitle:'Ready to get started?', ctaSub:'Send us a message and let\'s talk about what we can build for you.',
+    ctaBtn:'Message us on WhatsApp', ctaEmail:'or email us at ivy@hyprsea.com',
+    footerTxt:'© 2026 Hyprsea Solutions · ivy@hyprsea.com'
+  },
+  es: {
+    navSrv:'Servicios', navTeam:'Equipo', navP:'Precios', navT:'Reseñas', navCta:'Agendar llamada',
+    badge:'Van & Bi — Hyprsea Solutions',
+    heroTitle:'Soluciones <span style="color:var(--sea-500)">a tu alcance.</span>',
+    heroSub:'Desarrollamos apps, sitios web y brindamos soporte técnico presencial — todo lo que tu negocio necesita para crecer.',
+    ctaWa:'Escríbenos por WhatsApp', ctaSee:'Ver servicios',
+    lblSrv:'Qué hacemos', ttlSrv:'Todo lo que tu negocio necesita', subSrv:'Desde tu presencia digital hasta soporte de hardware en persona — nosotros te cubrimos.',
+    s1t:'Desarrollo web', s1d:'Sitios web personalizados para tu marca — rápidos, modernos y adaptados a móvil.',
+    s2t:'Apps para negocios', s2d:'Apps sencillas y efectivas para optimizar tus operaciones.',
+    s3t:'Reparaciones presenciales', s3d:'Reparaciones de hardware y software en sitio. Diagnosticamos y reparamos rápido.',
+    lblTeam:'El equipo', ttlTeam:'Conoce a Van & Bi', subTeam:'Dos desarrolladores, una pasión compartida por construir cosas que funcionan.',
+    vanRole:'Co-fundador · Desarrollador', biRole:'Co-fundadora · Desarrolladora',
+    lblP:'Precios', ttlP:'Planes simples y transparentes', subP:'Sin costos ocultos. Hablemos y construyamos algo hecho para ti.',
+    popular:'Más popular',
+    p1n:'Básico', p1d:'Para negocios pequeños que están comenzando.', p1price:'Próximamente',
+    p1f1:'Landing page', p1f2:'Diseño adaptable a móvil', p1f3:'Formulario de contacto', p1btnT:'Comenzar',
+    p2n:'Crecimiento', p2d:'Para negocios en expansión que necesitan más.', p2price:'Próximamente',
+    p2f1:'Sitio web completo', p2f2:'App o panel admin personalizado', p2f3:'SEO básico incluido', p2f4:'1 mes de soporte', p2btnT:'Agendar llamada',
+    p3n:'Personalizado', p3d:'Soluciones a medida para cualquier necesidad.', p3price:'Hablemos',
+    p3f1:'Reparaciones de hardware y software', p3f2:'Visitas en sitio', p3f3:'Retención mensual', p3btnT:'Obtener cotización',
+    lblT:'Testimoniales', ttlT:'Lo que dicen nuestros clientes', subT:'Negocios reales, resultados reales. Más en camino.',
+    t1q:'"Construyeron nuestro sitio en menos de una semana y quedó increíble. Los clientes empezaron a llamarnos de inmediato."',
+    t2q:'"Equipo muy profesional. Vinieron a nuestra oficina y repararon todo el mismo día. Nos salvaron la vida."',
+    t3q:'"La app de inventario que hicieron nos ahorra horas cada semana. Fácil de usar, exactamente lo que necesitábamos."',
+    t1r:'Dueña, Panadería Don Luis', t2r:'Gerente, Agencia KV', t3r:'Directora, Ferretería El Pino',
+    ctaTitle:'¿Listo para comenzar?', ctaSub:'Mándanos un mensaje y hablemos de lo que podemos construir para ti.',
+    ctaBtn:'Escríbenos por WhatsApp', ctaEmail:'o escríbenos a ivy@hyprsea.com',
+    footerTxt:'© 2026 Hyprsea Solutions · ivy@hyprsea.com'
+  }
+};
+
+function setLang(l) {
+  const c = T[l];
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  document.getElementById('btn-es').classList.toggle('active', l==='es');
+  const map = {
+    'nav-services':'navSrv','nav-team':'navTeam','nav-pricing':'navP','nav-testi':'navT','nav-cta-text':'navCta',
+    'badge-text':'badge','hero-sub':'heroSub','cta-wa':'ctaWa','cta-see':'ctaSee',
+    'lbl-srv':'lblSrv','ttl-srv':'ttlSrv','sub-srv':'subSrv',
+    's1t':'s1t','s1d':'s1d','s2t':'s2t','s2d':'s2d','s3t':'s3t','s3d':'s3d',
+    'lbl-team':'lblTeam','ttl-team':'ttlTeam','sub-team':'subTeam','van-role':'vanRole','bi-role':'biRole',
+    'lbl-p':'lblP','ttl-p':'ttlP','sub-p':'subP','popular':'popular',
+    'p1n':'p1n','p1d':'p1d','p1price':'p1price','p1f1':'p1f1','p1f2':'p1f2','p1f3':'p1f3','p1btn-t':'p1btnT',
+    'p2n':'p2n','p2d':'p2d','p2price':'p2price','p2f1':'p2f1','p2f2':'p2f2','p2f3':'p2f3','p2f4':'p2f4','p2btn-t':'p2btnT',
+    'p3n':'p3n','p3d':'p3d','p3price':'p3price','p3f1':'p3f1','p3f2':'p3f2','p3f3':'p3f3','p3btn-t':'p3btnT',
+    'lbl-t':'lblT','ttl-t':'ttlT','sub-t':'subT',
+    't1q':'t1q','t2q':'t2q','t3q':'t3q',
+    't1r':'t1r','t2r':'t2r','t3r':'t3r',
+    'cta-title':'ctaTitle','cta-sub':'ctaSub','cta-btn':'ctaBtn','cta-email':'ctaEmail',
+    'footer-txt':'footerTxt'
+  };
+  document.getElementById('hero-title').innerHTML = c.heroTitle;
+  for (const [id, key] of Object.entries(map)) {
+    const el = document.getElementById(id);
+    if (el && c[key] !== undefined) el.textContent = c[key];
+  }
+}
+
+// Auto-detect dark mode and invert logo
+const mql = window.matchMedia('(prefers-color-scheme: dark)');
+function updateLogo() {
+  const img = document.getElementById('nav-logo-img');
+  if (img) img.style.filter = mql.matches ? 'brightness(0) invert(1)' : 'none';
+}
+mql.addEventListener('change', updateLogo);
+updateLogo();
+</script>
